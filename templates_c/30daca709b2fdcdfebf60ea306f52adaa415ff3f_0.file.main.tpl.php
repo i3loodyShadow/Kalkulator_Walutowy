@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-04-21 12:22:53
-  from "D:\Xampp\htdocs\kalkulator5_1\templates\main.tpl" */
+/* Smarty version 3.1.30, created on 2020-04-24 14:16:40
+  from "D:\Xampp\htdocs\kalkulator6\templates\main.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5e9ec97da4fb87_61960965',
+  'unifunc' => 'content_5ea2d8a829d1d4_80737735',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '2d369bab4a7eb808412d34786a9ba5e661de9c6b' => 
+    '30daca709b2fdcdfebf60ea306f52adaa415ff3f' => 
     array (
-      0 => 'D:\\Xampp\\htdocs\\kalkulator5_1\\templates\\main.tpl',
-      1 => 1587461823,
+      0 => 'D:\\Xampp\\htdocs\\kalkulator6\\templates\\main.tpl',
+      1 => 1587729995,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e9ec97da4fb87_61960965 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ea2d8a829d1d4_80737735 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -29,10 +29,10 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 <head>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['page_description']->value)===null||$tmp==='' ? "Opis domyślny" : $tmp);?>
+	<meta name="description" content="<?php echo (($tmp = @$_smarty_tpl->tpl_vars['page_description']->value)===null||$tmp==='' ? "Deafult description" : $tmp);?>
 ">
 
-    <title><?php echo (($tmp = @$_smarty_tpl->tpl_vars['page_title']->value)===null||$tmp==='' ? "Tytuł domyślny" : $tmp);?>
+    <title><?php echo (($tmp = @$_smarty_tpl->tpl_vars['page_title']->value)===null||$tmp==='' ? "Deafult title" : $tmp);?>
 </title>
 
 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure.css">
@@ -77,25 +77,25 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 
 <div id="app_top" class="header">
     <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
-        <a class="pure-menu-heading" href=""><?php echo (($tmp = @$_smarty_tpl->tpl_vars['page_title']->value)===null||$tmp==='' ? "Tytuł domyślny" : $tmp);?>
+        <a class="pure-menu-heading" href=""><?php echo (($tmp = @$_smarty_tpl->tpl_vars['page_title']->value)===null||$tmp==='' ? "Deafult page title" : $tmp);?>
 </a>
         <ul>
-            <li class="pure-menu-selected"><a href="#app_top">Góra strony</a></li>
-            <li><a href="#app_content">Idź do formularza</a></li>
+            <li class="pure-menu-selected"><a href="#app_top">Top page</a></li>
+            <li><a href="#app_content">Go to cellar calculator</a></li>
         </ul>
     </div>
 </div>
 
 <div class="splash-container">
     <div class="splash">
-        <h1 class="splash-head"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['page_title']->value)===null||$tmp==='' ? "Tytuł domyślny" : $tmp);?>
+        <h1 class="splash-head"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['page_title']->value)===null||$tmp==='' ? "Deafult page title" : $tmp);?>
 </h1>
         <p class="splash-subhead">
-             <?php echo (($tmp = @$_smarty_tpl->tpl_vars['page_description']->value)===null||$tmp==='' ? "Opis domyślny" : $tmp);?>
+             <?php echo (($tmp = @$_smarty_tpl->tpl_vars['page_description']->value)===null||$tmp==='' ? "Deafult description" : $tmp);?>
 
         </p>
         <p>
-            <a href="#app_content" class="pure-button pure-button-primary">Idź do formularza</a>
+            <a href="#app_content" class="pure-button pure-button-primary">Go to cellar calculator</a>
         </p>
     </div>
 </div>
@@ -105,7 +105,7 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
     <div id="app_content" class="content">
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_4881841565e9ec97da4ece0_24610405', 'content');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20465499585ea2d8a829c149_84804056', 'content');
 ?>
 
 
@@ -114,11 +114,11 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_4881841565e9ec97da
     <div class="footer l-box is-center">
 		<p>
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1137794405e9ec97da4f657_48065900', 'footer');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_11272279435ea2d8a829cd19_49050343', 'footer');
 ?>
 
 		</p>
-        <p>Widok oparty na stylach i szablonie <a href="http://purecss.io/" target="_blank">Pure CSS Yahoo!</a>. (autor przykładu: Przemysław Kudłacik)</p>
+        <p>Wiew based on style and template form <a href="http://purecss.io/" target="_blank">Pure CSS Yahoo!</a>. (Cellar author: Eryk Tyndel)</p>
     </div>
 
 </div>
@@ -128,20 +128,20 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1137794405e9ec97da
 </html>
 <?php }
 /* {block 'content'} */
-class Block_4881841565e9ec97da4ece0_24610405 extends Smarty_Internal_Block
+class Block_20465499585ea2d8a829c149_84804056 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
- Domyślna treść zawartości .... <?php
+ Default content  <?php
 }
 }
 /* {/block 'content'} */
 /* {block 'footer'} */
-class Block_1137794405e9ec97da4f657_48065900 extends Smarty_Internal_Block
+class Block_11272279435ea2d8a829cd19_49050343 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
- Domyślna treść stopki .... <?php
+ Default content  <?php
 }
 }
 /* {/block 'footer'} */

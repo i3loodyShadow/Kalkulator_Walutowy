@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-04-21 12:22:53
-  from "D:\Xampp\htdocs\kalkulator5_1\app\CalcView.tpl" */
+/* Smarty version 3.1.30, created on 2020-04-24 14:16:40
+  from "D:\Xampp\htdocs\kalkulator6\app\calc\CalcView.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5e9ec97da26297_03929674',
+  'unifunc' => 'content_5ea2d8a8272d84_41669925',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'd840a3be5572f12a6f81d27cb31da078a97533f7' => 
+    '045e6f71a53efd52c1f7ab6ffed4bb0e594e7bc7' => 
     array (
-      0 => 'D:\\Xampp\\htdocs\\kalkulator5_1\\app\\CalcView.tpl',
-      1 => 1587462764,
+      0 => 'D:\\Xampp\\htdocs\\kalkulator6\\app\\calc\\CalcView.tpl',
+      1 => 1587729469,
       2 => 'file',
     ),
   ),
@@ -20,24 +20,24 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5e9ec97da26297_03929674 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ea2d8a8272d84_41669925 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_9871481005e9ec97da0c1b9_40197092', 'footer');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20865021355ea2d8a8259e85_98812759', 'footer');
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_21357971755e9ec97da25c41_14789501', 'content');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17819747655ea2d8a8271f21_63120519', 'content');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender(($_smarty_tpl->tpl_vars['conf']->value->root_path).("/templates/main.tpl"), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, true);
 }
 /* {block 'footer'} */
-class Block_9871481005e9ec97da0c1b9_40197092 extends Smarty_Internal_Block
+class Block_20865021355ea2d8a8259e85_98812759 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -46,7 +46,7 @@ Thank You for using my (unfortunately outdated) cellar calculator! Work on impro
 }
 /* {/block 'footer'} */
 /* {block 'content'} */
-class Block_21357971755e9ec97da25c41_14789501 extends Smarty_Internal_Block
+class Block_17819747655ea2d8a8271f21_63120519 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -56,12 +56,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 
 <div class="pure-g">
 <div class="l-box-lrg pure-u-1 pure-u-med-2-5">
-	<form class="pure-form pure-form-stacked" action="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
-/app/calc.php" method="post">
+	<form class="pure-form pure-form-stacked" action="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+calcCompute" method="post">
 		<fieldset>
 
 			<label for="x">Entered amount</label>
-			<input id="x" type="text" placeholder="wartość x" name="x" value="<?php echo $_smarty_tpl->tpl_vars['form']->value->x;?>
+			<input id="x" type="text" placeholder="enter Your amount here" name="x" value="<?php echo $_smarty_tpl->tpl_vars['form']->value->x;?>
 ">
 
 			<label for="op">Please choose Your cellar</label>
