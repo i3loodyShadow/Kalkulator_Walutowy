@@ -1,7 +1,9 @@
 <?php
 
-require_once 'CalcForm.class.php';
-require_once 'CalcResult.class.php';
+namespace app\controllers;
+
+use app\forms\CalcForm;
+use app\transfer\CalcResult;
 
 class CalcCtrl {
 
@@ -10,7 +12,6 @@ class CalcCtrl {
         private $hide_intro;
 
 	public function __construct(){
-
 		$this->form = new CalcForm();
 		$this->result = new CalcResult();
 	}
@@ -21,7 +22,6 @@ class CalcCtrl {
 	}
 	
 	public function validate() {
-
 		if (! (isset ( $this->form->x ) && isset ( $this->form->op ))) {
 			return false;
 		} else {
@@ -54,7 +54,7 @@ class CalcCtrl {
 				
 			$this->form->x = intval($this->form->x);
 			getMessages()->addInfo('Parameters has beed passed.');
-                        
+				
 			switch ($this->form->op) {
 				case 'CHF' :
 					$this->result->result = $this->form->x * $this->form->CHF_Curr;
@@ -86,8 +86,8 @@ class CalcCtrl {
 		getSmarty()->assign('page_description','The exchange rate may not be up to date!');
 		getSmarty()->assign('page_header','(Very very simple)');
                 
-                getSmarty()->assign('hide_intro',$this->hide_intro);
-					
+                getSmarty()->assign('hide_intro',$this->hide_intro);					
+                
 		getSmarty()->assign('form',$this->form);
 		getSmarty()->assign('res',$this->result);
 		
