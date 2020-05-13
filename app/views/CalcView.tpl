@@ -3,6 +3,10 @@
 {block name=footer}Thank You for using my (unfortunately outdated) cellar calculator! Work on improvement is ongoing.{/block}
 
 {block name=content}
+    
+<div class="pure-menu pure-menu-horizontal bottom-margin">
+	<a href="{$conf->action_url}logout"  class="pure-menu-heading pure-menu-link">Log out</a>
+</div>
 
 <h2 class="content-head is-center">Cellar calculator</h2>
 
@@ -31,28 +35,8 @@
 </div>
 
 <div class="l-box-lrg pure-u-1 pure-u-med-3-5">
-
-{if $msgs->isError()}
-	<h4>Errors occured: </h4>
-	<ol class="err">
-	{foreach $msgs->getErrors() as $err}
-	{strip}
-		<li>{$err}</li>
-	{/strip}
-	{/foreach}
-	</ol>
-{/if}
-
-{if $msgs->isInfo()}
-	<h4>Infos: </h4>
-	<ol class="inf">
-	{foreach $msgs->getInfos() as $inf}
-	{strip}
-		<li>{$inf}</li>
-	{/strip}
-	{/foreach}
-	</ol>
-{/if}
+    
+{include file='messages.tpl'}
 
 {if isset($res->result)}
 	<h4>Amount in PLN:</h4>
