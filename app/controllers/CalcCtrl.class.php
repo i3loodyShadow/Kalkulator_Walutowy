@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use app\forms\CalcForm;
@@ -22,6 +21,7 @@ class CalcCtrl {
 	}
 	
 	public function validate() {
+
 		if (! (isset ( $this->form->x ) && isset ( $this->form->op ))) {
 			return false;
 		} else {
@@ -54,21 +54,29 @@ class CalcCtrl {
 				
 			$this->form->x = intval($this->form->x);
 			getMessages()->addInfo('Parameters has beed passed.');
-				
+
 			switch ($this->form->op) {
 				case 'CHF' :
-					$this->result->result = $this->form->x * $this->form->CHF_Curr;
-					$this->result->op_name = 'CHF';
+					if (inRole('admin')) {
+						$this->result->result = $this->form->x * $this->form->CHF_Curr;
+                                                $this->result->op_name = 'CHF';
+					} else {
+						getMessages()->addError('Only admin can use this cellar');
+					}
 					break;
 				case 'Euro' :
 					$this->result->result = $this->form->x * $this->form->Euro_Curr;
 					$this->result->op_name = 'Euro';
 					break;
 				case 'Pound' :
-					$this->result->result = $this->form->x * $this->form->Pound_Curr;
-					$this->result->op_name = 'Pound';
+					if (inRole('admin')) {
+						$this->result->result = $this->form->x * $this->form->Pound_Curr;
+                                                $this->result->op_name = 'Pound';
+					} else {
+						getMessages()->addError('Only admin can use this cellar');
+					}
 					break;
-                                case 'Dollar' : 
+				case 'Dollar' : 
 					$this->result->result = $this->form->x * $this->form->Dollar_Curr;
 					$this->result->op_name = 'Dollar';
 					break;
@@ -80,13 +88,15 @@ class CalcCtrl {
 		$this->generateView();
 	}
 	
+	
 	public function generateView(){
-		
+
+		getSmarty()->assign('user',unserialize($_SESSION['user']));				
 		getSmarty()->assign('page_title','Cellar calculator');
-		getSmarty()->assign('page_description','The exchange rate may not be up to date!');
-		getSmarty()->assign('page_header','(Very very simple)');
+                getSmarty()->assign('page_description','The exchange rate may not be up to date!');
+                getSmarty()->assign('page_header','(Very very simple)');
                 
-                getSmarty()->assign('hide_intro',$this->hide_intro);					
+                getSmarty()->assign('hide_intro',$this->hide_intro);	
                 
 		getSmarty()->assign('form',$this->form);
 		getSmarty()->assign('res',$this->result);
