@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers;
 
 use app\forms\CalcForm;
@@ -21,10 +22,9 @@ class CalcCtrl {
 	}
 	
 	public function validate() {
-
 		if (! (isset ( $this->form->x ) && isset ( $this->form->op ))) {
 			return false;
-		} else {
+		}else {
                     $this->hide_intro = true;
                 }
 		
@@ -45,8 +45,8 @@ class CalcCtrl {
 		
 		return ! getMessages()->isError();
 	}
-	
-	public function process(){
+
+	public function action_calcCompute(){
 
 		$this->getParams();
 		
@@ -54,7 +54,7 @@ class CalcCtrl {
 				
 			$this->form->x = intval($this->form->x);
 			getMessages()->addInfo('Parameters has beed passed.');
-
+				
 			switch ($this->form->op) {
 				case 'CHF' :
 					if (inRole('admin')) {
@@ -88,6 +88,10 @@ class CalcCtrl {
 		$this->generateView();
 	}
 	
+	public function action_calcShow(){
+		getMessages()->addInfo('Welcome into cellar calculator');
+		$this->generateView();
+	}
 	
 	public function generateView(){
 
