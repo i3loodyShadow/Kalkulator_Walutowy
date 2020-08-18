@@ -3,6 +3,7 @@
 namespace app\transfer;
 
 class CalcResult {
-	public $op_name;
-	public $result;	
+	public $cellar;
+	public $result;
+        public $amount;
 } 

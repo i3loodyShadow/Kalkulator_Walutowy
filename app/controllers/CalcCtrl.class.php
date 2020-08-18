@@ -6,14 +6,15 @@ use app\forms\CalcForm;
 use app\transfer\CalcResult;
 
 class CalcCtrl {
-
+        
 	private $form;
 	private $result;
+        private $datas;
         private $hide_intro;
 
 	public function __construct(){
 		$this->form = new CalcForm();
-		$this->result = new CalcResult();
+		$this->result = new CalcResult();               
 	}
 	
 	public function getParams(){
@@ -45,7 +46,7 @@ class CalcCtrl {
 		
 		return ! getMessages()->isError();
 	}
-
+        
 	public function action_calcCompute(){
 
 		$this->getParams();
@@ -59,35 +60,58 @@ class CalcCtrl {
 				case 'CHF' :
 					if (inRole('admin')) {
 						$this->result->result = $this->form->x * $this->form->CHF_Curr;
-                                                $this->result->op_name = 'CHF';
+                                                $this->result->cellar = 'CHF';
+                                                $this->save_history();
+                                                $this->assign_history();
 					} else {
 						getMessages()->addError('Only admin can use this cellar');
 					}
 					break;
 				case 'Euro' :
 					$this->result->result = $this->form->x * $this->form->Euro_Curr;
-					$this->result->op_name = 'Euro';
+					$this->result->cellar = 'Euro';
+                                        $this->save_history();
+                                        $this->assign_history();
 					break;
 				case 'Pound' :
 					if (inRole('admin')) {
 						$this->result->result = $this->form->x * $this->form->Pound_Curr;
-                                                $this->result->op_name = 'Pound';
+                                                $this->result->cellar = 'Pound';
+                                                $this->save_history();
+                                                $this->assign_history();
 					} else {
 						getMessages()->addError('Only admin can use this cellar');
 					}
 					break;
 				case 'Dollar' : 
 					$this->result->result = $this->form->x * $this->form->Dollar_Curr;
-					$this->result->op_name = 'Dollar';
+					$this->result->cellar = 'Dollar';
+                                        $this->save_history();
+                                        $this->assign_history();
 					break;
 			}
 			
+                        
 			getMessages()->addInfo('Parameters is correct. Im heading into convert cellar.');
-		}
-		
+                        
+                }
 		$this->generateView();
-	}
-	
+	} 
+        
+        private function save_history(){
+            
+            getDB()->insert("result", [
+               "amount" => $this->form->x,
+               "cellar" => $this->result->cellar,
+               "amountPLN" => $this->result->result,
+               "date" => date("Y-m-d H:i:s")
+            ]);
+        }
+        
+        private function assign_history() {
+            $this->datas = getDB()->select("result","*");
+        }   
+        
 	public function action_calcShow(){
 		getMessages()->addInfo('Welcome into cellar calculator');
 		$this->generateView();
@@ -102,6 +126,7 @@ class CalcCtrl {
                 
                 getSmarty()->assign('hide_intro',$this->hide_intro);	
                 
+                getSmarty()->assign('data', $this->datas);
 		getSmarty()->assign('form',$this->form);
 		getSmarty()->assign('res',$this->result);
 		
