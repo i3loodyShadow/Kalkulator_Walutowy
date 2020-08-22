@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Xampp/htdocs/php_8_1_bd/app/views/CalcView.tpl</file>
-            <file>file:/D:/Xampp/htdocs/php_8_1_bd/app/controllers/CalcCtrl.class.php</file>
+            <file>file:/D:/Xampp/htdocs/amelia_test/public/css/style.css</file>
+            <file>file:/D:/Xampp/htdocs/amelia_test/app/views/CalcView.tpl</file>
+            <file>file:/D:/Xampp/htdocs/amelia_test/core/Messages.class.php</file>
+            <file>file:/D:/Xampp/htdocs/amelia_test/app/views/templates/messages.tpl</file>
+            <file>file:/D:/Xampp/htdocs/amelia_test/app/controllers/CalcCtrl.class.php</file>
         </group>
     </open-files>
 </project-private>
