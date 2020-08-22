@@ -2,6 +2,10 @@
 
 namespace app\controllers;
 
+use core\App;
+use core\Utils;
+use core\RoleUtils;
+use core\ParamUtils;
 use app\forms\CalcForm;
 use app\transfer\CalcResult;
 
@@ -16,35 +20,41 @@ class CalcCtrl {
 		$this->form = new CalcForm();
 		$this->result = new CalcResult();               
 	}
+        
+        public function getParams(){
+            $this->form->x = ParamUtils::getFromRequest('x');
+            $this->form->op = ParamUtils::getFromRequest('op');
+                
+        }
 	
-	public function getParams(){
-		$this->form->x = getFromRequest('x');
-		$this->form->op = getFromRequest('op');
-	}
-	
-	public function validate() {
-		if (! (isset ( $this->form->x ) && isset ( $this->form->op ))) {
-			return false;
+	public function validate() {               
+                       
+		if (!(isset ($this->form->x) && isset($this->form->op))){
+                    Utils::addErrorMessage('Amount and cellar must be setted!');
+                    return false;
 		}else {
                     $this->hide_intro = true;
                 }
 		
 		if ($this->form->x == "") {
-			getMessages()->addError('No amount to be converted!');
+			Utils::addErrorMessage('No amount to be converted!');
+                        $this->assign_history();
 		}
 		
-		if (! getMessages()->isError()) {
+		if (!App::getMessages()->isError()){
 			
-			if (! is_numeric ( $this->form->x )) {
-				getMessages()->addError('Typed "amount" is not numeric!');
+			if (!is_numeric ( $this->form->x )) {
+				Utils::addErrorMessage('Typed "amount" is not numeric!');
+                                $this->assign_history();
 			}
 			
 			if ($this->form->x <= 0) {
-				getMessages()->addError('Typed amount can not be equals (or less than) 0!');
+				Utils::addErrorMessage('Typed amount can not be equals (or less than) 0!');
+                                $this->assign_history();
 			}
 		}
 		
-		return ! getMessages()->isError();
+		return !App::getMessages()->isError();
 	}
         
 	public function action_calcCompute(){
@@ -54,17 +64,18 @@ class CalcCtrl {
 		if ($this->validate()) {
 				
 			$this->form->x = intval($this->form->x);
-			getMessages()->addInfo('Parameters has beed passed.');
+			Utils::addInfoMessage('Parameters has beed passed.');
+                        $this->assign_history();
 				
 			switch ($this->form->op) {
 				case 'CHF' :
-					if (inRole('admin')) {
+					if (RoleUtils::inRole('admin')) {
 						$this->result->result = $this->form->x * $this->form->CHF_Curr;
                                                 $this->result->cellar = 'CHF';
                                                 $this->save_history();
                                                 $this->assign_history();
 					} else {
-						getMessages()->addError('Only admin can use this cellar');
+						Utils::addErrorMessage('Only admin can use this cellar');
 					}
 					break;
 				case 'Euro' :
@@ -74,13 +85,13 @@ class CalcCtrl {
                                         $this->assign_history();
 					break;
 				case 'Pound' :
-					if (inRole('admin')) {
+					if (RoleUtils::inRole('admin')) {
 						$this->result->result = $this->form->x * $this->form->Pound_Curr;
                                                 $this->result->cellar = 'Pound';
                                                 $this->save_history();
                                                 $this->assign_history();
 					} else {
-						getMessages()->addError('Only admin can use this cellar');
+						Utils::addErrorMessage('Only admin can use this cellar');
 					}
 					break;
 				case 'Dollar' : 
@@ -92,7 +103,7 @@ class CalcCtrl {
 			}
 			
                         
-			getMessages()->addInfo('Parameters is correct. Im heading into convert cellar.');
+			Utils::addInfoMessage('Parameters is correct. Im heading into convert cellar.');
                         
                 }
 		$this->generateView();
@@ -100,7 +111,7 @@ class CalcCtrl {
         
         private function save_history(){
             
-            getDB()->insert("result", [
+            App::getDB()->insert("result", [
                "amount" => $this->form->x,
                "cellar" => $this->result->cellar,
                "amountPLN" => $this->result->result,
@@ -109,27 +120,26 @@ class CalcCtrl {
         }
         
         private function assign_history() {
-            $this->datas = getDB()->select("result","*");
+            $this->datas = App::getDB()->select("result","*");
         }   
         
 	public function action_calcShow(){
-		getMessages()->addInfo('Welcome into cellar calculator');
+		Utils::addInfoMessage('Welcome into cellar calculator');
 		$this->generateView();
 	}
 	
 	public function generateView(){
-
-		getSmarty()->assign('user',unserialize($_SESSION['user']));				
-		getSmarty()->assign('page_title','Cellar calculator');
-                getSmarty()->assign('page_description','The exchange rate may not be up to date!');
-                getSmarty()->assign('page_header','(Very very simple)');
+				
+		App::getSmarty()->assign('page_title','Cellar calculator');
+                App::getSmarty()->assign('page_description','The exchange rate may not be up to date!');
+                App::getSmarty()->assign('page_header','(Very very simple)');
                 
-                getSmarty()->assign('hide_intro',$this->hide_intro);	
+                App::getSmarty()->assign('hide_intro',$this->hide_intro);	
                 
-                getSmarty()->assign('data', $this->datas);
-		getSmarty()->assign('form',$this->form);
-		getSmarty()->assign('res',$this->result);
+                App::getSmarty()->assign('data', $this->datas);
+		App::getSmarty()->assign('form',$this->form);
+		App::getSmarty()->assign('res',$this->result);
 		
-		getSmarty()->display('CalcView.tpl');
+		App::getSmarty()->display('CalcView.tpl');
 	}
 }
