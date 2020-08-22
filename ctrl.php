@@ -1,13 +1,8 @@
 <?php
 require_once 'init.php';
 
-getRouter()->setDefaultRoute('calcShow');
-getRouter()->setLoginRoute('login');
+require_once 'routing.php';
 
-getRouter()->addRoute('calcShow',    'CalcCtrl',    ['user','admin']);
-getRouter()->addRoute('calcCompute', 'CalcCtrl',    ['user','admin']);
-getRouter()->addRoute('results',     'ResultsCtrl', ['user','admin']);
-getRouter()->addRoute('login',       'LoginCtrl');
-getRouter()->addRoute('logout',      'LoginCtrl',   ['user','admin']);
+\core\SessionUtils::loadMessages();
 
-getRouter()->go();
+\core\App::getRouter()->go();
