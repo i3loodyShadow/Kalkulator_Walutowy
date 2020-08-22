@@ -2,83 +2,74 @@
 
 namespace app\controllers;
 
-use app\transfer\User;
+use core\App;
+use core\Utils;
+use core\RoleUtils;
+use core\ParamUtils;
 use app\forms\LoginForm;
 
 class LoginCtrl{
 	private $form;
 	
 	public function __construct(){
-		$this->form = new LoginForm();
-	}
-	
-	public function getParams(){
-		$this->form->login = getFromRequest('login');
-		$this->form->pass = getFromRequest('pass');
+            $this->form = new LoginForm();
 	}
 	
 	public function validate() {
-		if (! (isset ( $this->form->login ) && isset ( $this->form->pass ))) {
-			return false;
-		}
+            $this->form->login = ParamUtils::getFromRequest('login');
+            $this->form->pass = ParamUtils::getFromRequest('pass');
 
-		if (! getMessages()->isError ()) {
-			
-			if ($this->form->login == "") {
-				getMessages()->addError ( 'Login cannot be empty' );
-			}
-			if ($this->form->pass == "") {
-				getMessages()->addError ( 'Password cannot be empty!' );
-			}
-		}
+            
+            if (!isset($this->form->login))
+                return false;
 
-		if ( !getMessages()->isError() ) {
-		
-			if ($this->form->login == "admin" && $this->form->pass == "admin") {
+            if (empty($this->form->login)) {
+                Utils::addErrorMessage('Login cannot be empty!');
+            }
+            if (empty($this->form->pass)) {
+                Utils::addErrorMessage('Password cannot be empty');
+            }
 
-				$user = new User($this->form->login, 'admin');
-				$_SESSION['user'] = serialize($user);
-				addRole($user->role);
+            if (App::getMessages()->isError())
+                return false;
 
-			} else if ($this->form->login == "user" && $this->form->pass == "user") {
+            if ($this->form->login == "admin" && $this->form->pass == "admin") {
+                RoleUtils::addRole('admin');
+            } else if ($this->form->login == "user" && $this->form->pass == "user") {
+                RoleUtils::addRole('user');
+            } else {
+                Utils::addErrorMessage('Incorrect login or password');
+            }
 
-				$user = new User($this->form->login, 'user');
-				$_SESSION['user'] = serialize($user);
-				addRole($user->role);
-
-			} else {
-				getMessages()->addError('Incorrect login or password');
-			}
-		}
-		
-		return ! getMessages()->isError();
-	}
+            return !App::getMessages()->isError();
+        }   
+        
+        public function action_loginShow() {
+            $this->generateView();
+        }
 	
-	public function action_login(){
-
-		$this->getParams();
-		
-		if ($this->validate()){
-			header("Location: ".getConf()->app_url."/");
-		} else {
-			$this->generateView(); 
-		}
-		
-	}
+	public function action_login() {
+            if ($this->validate()) {
+                App::getRouter()->redirectTo("calcShow");
+            } else {
+                $this->generateView();
+            }
+        }
 	
 	public function action_logout(){
 		session_destroy();
 
-		getMessages()->addInfo('Logout successfull');
+		Utils::addInfoMessage('Logout successfull');
+                App::getRouter()->redirectTo('login');
 
 		$this->generateView();		 
 	}
 	
 	public function generateView(){
 		
-		getSmarty()->assign('page_title','Log in page');
-                getSmarty()->assign('page_description','Click button below to go to log in.');
-		getSmarty()->assign('form',$this->form);
-		getSmarty()->display('LoginView.tpl');		
+		App::getSmarty()->assign('page_title','Log in page');
+                App::getSmarty()->assign('page_description','Click button below to go to log in.');
+		App::getSmarty()->assign('form',$this->form);
+		App::getSmarty()->display('LoginView.tpl');		
 	}
 }
