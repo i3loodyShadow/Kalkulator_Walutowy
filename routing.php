@@ -10,4 +10,6 @@ Utils::addRoute('login',       'LoginCtrl');
 Utils::addRoute('logout',      'LoginCtrl');
 Utils::addRoute('calcShow',    'CalcCtrl',    ['user','admin']);
 Utils::addRoute('calcCompute', 'CalcCtrl',    ['user','admin']);
-
+Utils::addRoute('historyView', 'ResultCtrl',  ['user','admin']);
+Utils::addRoute('historyPartView', 'ResultCtrl', ['user','admin']);
+Utils::addRoute('backFromHistory', 'CalcCtrl',  ['user','admin']); 
