@@ -24,6 +24,8 @@
     <!--<![endif]-->
 
     <link rel="stylesheet" href="{$conf->app_url}/css/style.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/grids-responsive-min.css" />
 {if $hide_intro }
     <link rel="stylesheet" href="{$conf->app_url}/css/style_hide_intro.css">
 {/if}
@@ -32,6 +34,7 @@
 
 	<script src="{$conf->app_url}/js/jquery.min.js"></script>
 	<script src="{$conf->app_url}/js/softscroll.js"></script>
+        <script src="{$conf->app_url}/js/functions.js"></script>
 </head>
 <body>
 
@@ -58,10 +61,12 @@
 </div>
 
 <div class="content-wrapper">
-
     <div id="app_content" class="content">
 
 {block name=content} Default content  {/block}
+
+
+{block name=resultTable} {/block}
 
     </div>
 
