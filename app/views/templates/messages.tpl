@@ -4,14 +4,7 @@
 	<ul>
 	{foreach $msgs->getMessages() as $msg}
 	{strip}
-		<li class="msg 
-                    {if $msg->isError()}Errors occured:{/if} 
-                    {if $msg->isWarning()}warning{/if} 
-                    {if $msg->isInfo()}Infos:{/if}">
-                    <p class="coms">
-                        {$msg->text}
-                    </p>
-                </li>
+		<li class="msg {if $msg->isError()}error{/if} {if $msg->isWarning()}warning{/if} {if $msg->isInfo()}info{/if}">{$msg->text}</li>
 	{/strip}
 	{/foreach}
 	</ul>
