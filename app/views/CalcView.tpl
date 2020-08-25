@@ -24,7 +24,7 @@
 <option value="" disabled="true">---</option>
 {/if}
 						<option value="CHF">CHF</option>
-                                                <option value="Euro">Euro</option>
+                                                <option value="Euro">EUR</option>
                                                 <option value="Pound">GBP</option>
                                                 <option value="Dollar">USD</option>
 					</select>
@@ -46,33 +46,11 @@
 {/if}
 
 </div>
+</div>
 
-<div class="pure-u-1 pure-u-lg-1-2">
-    <table id="tab_history" class="pure-table pure-table-aligned center-margin pure-table-bordered">
-        <thead>
-            <tr>
-		<th>Number of exchange</th>
-		<th>Amount</th>
-		<th>Cellar</th>
-		<th>Amount in PLN</th>
-                <th>Date of exchange</th>
-	</tr>           
-        </thead>
-        <tbody>
-            {foreach $data as $d}
-                {strip}
-                    <tr>
-                        <td>{$d["idresult"]}</td>
-                        <td>{$d["amount"]}</td>
-                        <td>{$d["cellar"]}</td>
-                        <td>{$d["amountPLN"]}</td>
-                        <td>{$d["date"]}</td>
-                    </tr>
-                {/strip}
-            {/foreach}
-        </tbody>
-    </table>
-</div>
-</div>
+<form action="{$conf->action_root}historyView" method="post"  class="pure-form pure-form-aligned center-margin">
+    <input type="submit" value="Click to check history of exchanges" class="pure-button"/>
+</form>
+
 
 {/block}
