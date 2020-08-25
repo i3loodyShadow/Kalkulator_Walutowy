@@ -38,19 +38,16 @@ class CalcCtrl {
 		
 		if ($this->form->x == "") {
 			Utils::addErrorMessage('No amount to be converted!');
-                        $this->assign_history();
 		}
 		
 		if (!App::getMessages()->isError()){
 			
 			if (!is_numeric ( $this->form->x )) {
 				Utils::addErrorMessage('Typed "amount" is not numeric!');
-                                $this->assign_history();
 			}
 			
 			if ($this->form->x <= 0) {
 				Utils::addErrorMessage('Typed amount can not be equals (or less than) 0!');
-                                $this->assign_history();
 			}
 		}
 		
@@ -65,7 +62,6 @@ class CalcCtrl {
 				
 			$this->form->x = intval($this->form->x);
 			Utils::addInfoMessage('Parameters has beed passed.');
-                        $this->assign_history();
 				
 			switch ($this->form->op) {
 				case 'CHF' :
@@ -73,32 +69,28 @@ class CalcCtrl {
 						$this->result->result = $this->form->x * $this->form->CHF_Curr;
                                                 $this->result->cellar = 'CHF';
                                                 $this->save_history();
-                                                $this->assign_history();
 					} else {
 						Utils::addErrorMessage('Only admin can use this cellar');
 					}
 					break;
 				case 'Euro' :
 					$this->result->result = $this->form->x * $this->form->Euro_Curr;
-					$this->result->cellar = 'Euro';
+					$this->result->cellar = 'EUR';
                                         $this->save_history();
-                                        $this->assign_history();
 					break;
 				case 'Pound' :
 					if (RoleUtils::inRole('admin')) {
 						$this->result->result = $this->form->x * $this->form->Pound_Curr;
-                                                $this->result->cellar = 'Pound';
+                                                $this->result->cellar = 'GBP';
                                                 $this->save_history();
-                                                $this->assign_history();
 					} else {
 						Utils::addErrorMessage('Only admin can use this cellar');
 					}
 					break;
 				case 'Dollar' : 
 					$this->result->result = $this->form->x * $this->form->Dollar_Curr;
-					$this->result->cellar = 'Dollar';
+					$this->result->cellar = 'USD';
                                         $this->save_history();
-                                        $this->assign_history();
 					break;
 			}
 			
@@ -119,9 +111,10 @@ class CalcCtrl {
             ]);
         }
         
-        private function assign_history() {
-            $this->datas = App::getDB()->select("result","*");
-        }   
+        public function action_backFromHistory(){
+            Utils::addInfoMessage('Welcome again into cellar calculator');
+            $this->generateView();
+        }
         
 	public function action_calcShow(){
 		Utils::addInfoMessage('Welcome into cellar calculator');
@@ -136,7 +129,6 @@ class CalcCtrl {
                 
                 App::getSmarty()->assign('hide_intro',$this->hide_intro);	
                 
-                App::getSmarty()->assign('data', $this->datas);
 		App::getSmarty()->assign('form',$this->form);
 		App::getSmarty()->assign('res',$this->result);
 		
