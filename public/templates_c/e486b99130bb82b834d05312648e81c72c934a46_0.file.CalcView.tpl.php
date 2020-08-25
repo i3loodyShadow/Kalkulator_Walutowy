@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2020-08-19 12:33:01
+/* Smarty version 3.1.30, created on 2020-08-23 15:47:15
   from "D:\Xampp\htdocs\amelia_test\app\views\CalcView.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5f3cffdda14ce6_72164919',
+  'unifunc' => 'content_5f427363a31665_55631062',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e486b99130bb82b834d05312648e81c72c934a46' => 
     array (
       0 => 'D:\\Xampp\\htdocs\\amelia_test\\app\\views\\CalcView.tpl',
-      1 => 1596898234,
+      1 => 1598190434,
       2 => 'file',
     ),
   ),
@@ -22,24 +22,24 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:messages.tpl' => 1,
   ),
 ),false)) {
-function content_5f3cffdda14ce6_72164919 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f427363a31665_55631062 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18566737255f3cffdd9ed9a3_11270118', 'footer');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_12214275015f427363a221a5_11967045', 'footer');
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_20709226765f3cffdda14346_65763118', 'content');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_19273917525f427363a30fd7_81692308', 'content');
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:main.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'footer'} */
-class Block_18566737255f3cffdd9ed9a3_11270118 extends Smarty_Internal_Block
+class Block_12214275015f427363a221a5_11967045 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -48,7 +48,7 @@ Thank You for using my (unfortunately outdated) cellar calculator! Work on impro
 }
 /* {/block 'footer'} */
 /* {block 'content'} */
-class Block_20709226765f3cffdda14346_65763118 extends Smarty_Internal_Block
+class Block_19273917525f427363a30fd7_81692308 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -79,7 +79,7 @@ calcCompute" method="post">
 <option value="" disabled="true">---</option>
 <?php }?>
 						<option value="CHF">CHF</option>
-                                                <option value="Euro">Euro</option>
+                                                <option value="Euro">EUR</option>
                                                 <option value="Pound">GBP</option>
                                                 <option value="Dollar">USD</option>
 					</select>
@@ -104,40 +104,13 @@ calcCompute" method="post">
 <?php }?>
 
 </div>
-
-<div class="pure-u-1 pure-u-lg-1-2">
-    <table id="tab_history" class="pure-table pure-table-aligned center-margin pure-table-bordered">
-        <thead>
-            <tr>
-		<th>Number of exchange</th>
-		<th>Amount</th>
-		<th>Cellar</th>
-		<th>Amount in PLN</th>
-                <th>Date of exchange</th>
-	</tr>           
-        </thead>
-        <tbody>
-            <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['data']->value, 'd');
-if ($_from !== null) {
-foreach ($_from as $_smarty_tpl->tpl_vars['d']->value) {
-?>
-                <tr><td><?php echo $_smarty_tpl->tpl_vars['d']->value["idresult"];?>
-</td><td><?php echo $_smarty_tpl->tpl_vars['d']->value["amount"];?>
-</td><td><?php echo $_smarty_tpl->tpl_vars['d']->value["cellar"];?>
-</td><td><?php echo $_smarty_tpl->tpl_vars['d']->value["amountPLN"];?>
-</td><td><?php echo $_smarty_tpl->tpl_vars['d']->value["date"];?>
-</td></tr>
-            <?php
-}
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
-?>
-
-        </tbody>
-    </table>
 </div>
-</div>
+
+<form action="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+historyView" method="post"  class="pure-form pure-form-aligned center-margin">
+    <input type="submit" value="Click to check history of exchanges" class="pure-button"/>
+</form>
+
 
 <?php
 }
