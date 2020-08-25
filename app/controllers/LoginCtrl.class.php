@@ -59,10 +59,8 @@ class LoginCtrl{
 	public function action_logout(){
 		session_destroy();
 
-		Utils::addInfoMessage('Logout successfull');
                 App::getRouter()->redirectTo('login');
-
-		$this->generateView();		 
+		$this->generateView();	 
 	}
 	
 	public function generateView(){
